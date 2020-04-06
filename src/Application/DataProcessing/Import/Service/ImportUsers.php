@@ -27,6 +27,9 @@ class ImportUsers
      */
     public function __construct(ImportSource $source, DataStorage $userDataStorage)
     {
+        ini_set('max_execution_time', 300);
+        set_time_limit(300);
+    
         $this->source          = $source;
         $this->userDataStorage = $userDataStorage;
     }
@@ -84,5 +87,11 @@ class ImportUsers
         }
         
         return $usersData;
+    }
+    
+    public function __destruct()
+    {
+        ini_set('max_execution_time', 30);
+        set_time_limit(30);
     }
 }
